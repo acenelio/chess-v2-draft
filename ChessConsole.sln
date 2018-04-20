@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessConsole", "ChessConsole\ChessConsole.csproj", "{F7027C5E-2695-43CF-8E30-F0B6EC66D8DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessConsole", "ChessConsole\ChessConsole.csproj", "{F7027C5E-2695-43CF-8E30-F0B6EC66D8DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame", "BoardGame\BoardGame.csproj", "{C964D3CF-600E-4AB8-84A5-342CBB67D69E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F7027C5E-2695-43CF-8E30-F0B6EC66D8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7027C5E-2695-43CF-8E30-F0B6EC66D8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7027C5E-2695-43CF-8E30-F0B6EC66D8DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C964D3CF-600E-4AB8-84A5-342CBB67D69E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C964D3CF-600E-4AB8-84A5-342CBB67D69E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C964D3CF-600E-4AB8-84A5-342CBB67D69E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C964D3CF-600E-4AB8-84A5-342CBB67D69E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
