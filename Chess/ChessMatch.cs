@@ -27,6 +27,7 @@ namespace Chess {
             Position source = sourcePosition.ToPosition();
             Position target = targetPosition.ToPosition();
             ValidadeSourcePosition(source);
+            ValidateTargetPosition(source, target);
             Piece capturedPiece = MakeMove(source, target);
             return (ChessPiece)capturedPiece;
         }
@@ -44,6 +45,12 @@ namespace Chess {
             }
             if (!_board.Piece(position).IsThereAnyPossibleMove()) {
                 throw new ChessException("There is no possible moves for the chosen piece");
+            }
+        }
+
+        private void ValidateTargetPosition(Position source, Position target) {
+            if (!_board.Piece(source).PossibleMove(target)) {
+                throw new ChessException("The chosen piece can't move to target position");
             }
         }
 

@@ -8,5 +8,10 @@ namespace Chess {
         public ChessPiece(Board board, Color color) : base(board) {
             Color = color;
         }
+
+        protected bool IsThereOpponentPiece(Position position) {
+            ChessPiece p = (ChessPiece)Board.Piece(position);
+            return p != null && p.Color != Color;
+        }
     }
 }
