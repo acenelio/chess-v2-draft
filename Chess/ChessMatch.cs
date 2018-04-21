@@ -23,6 +23,12 @@ namespace Chess {
             }
         }
 
+        public bool[,] PossibleMoves(ChessPosition sourcePosition) {
+            Position source = sourcePosition.ToPosition();
+            ValidadeSourcePosition(source);
+            return _board.Piece(source).PossibleMoves();
+        }
+
         public ChessPiece PerformChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
             Position source = sourcePosition.ToPosition();
             Position target = targetPosition.ToPosition();

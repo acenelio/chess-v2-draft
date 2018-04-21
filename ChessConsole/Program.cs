@@ -15,6 +15,10 @@ namespace ChessConsole {
                     Console.Write("Source: ");
                     ChessPosition source = UI.ReadChessPosition();
 
+                    bool[,] possibleMoves = chessMatch.PossibleMoves(source);
+                    Console.Clear();
+                    UI.PrintBoard(chessMatch.Pieces, possibleMoves);
+                    Console.WriteLine();
                     Console.Write("Target: ");
                     ChessPosition target = UI.ReadChessPosition();
 
