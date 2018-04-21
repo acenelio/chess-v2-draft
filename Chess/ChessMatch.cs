@@ -4,10 +4,14 @@ using Chess.Pieces;
 namespace Chess {
     public class ChessMatch {
 
+        public int Turn { get; private set; }
+        public Color CurrentPlayer { get; private set; }
         private Board _board;
 
         public ChessMatch() {
             _board = new Board(8, 8);
+            Turn = 1;
+            CurrentPlayer = Color.White;
             InitialSetup();
         }
 
@@ -34,7 +38,11 @@ namespace Chess {
             Position target = targetPosition.ToPosition();
             ValidadeSourcePosition(source);
             ValidateTargetPosition(source, target);
+
             Piece capturedPiece = MakeMove(source, target);
+
+            NextTurn();
+
             return (ChessPiece)capturedPiece;
         }
 
@@ -48,6 +56,9 @@ namespace Chess {
         private void ValidadeSourcePosition(Position position) {
             if (_board.Piece(position) == null) {
                 throw new ChessException("There is no piece on source position");
+            }
+            if (CurrentPlayer != (_board.Piece(position) as ChessPiece).Color) {
+                throw new ChessException("The chosen piece is not yours");
             }
             if (!_board.Piece(position).IsThereAnyPossibleMove()) {
                 throw new ChessException("There is no possible moves for the chosen piece");
@@ -78,6 +89,11 @@ namespace Chess {
             PlaceNewPiece('e', 7, new Rook(_board, Color.Black));
             PlaceNewPiece('e', 8, new Rook(_board, Color.Black));
             PlaceNewPiece('d', 8, new King(_board, Color.Black));
+        }
+
+        private void NextTurn() {
+            Turn++;
+            CurrentPlayer = (CurrentPlayer == Color.White) ? Color.Black : Color.White;
         }
     }
 }

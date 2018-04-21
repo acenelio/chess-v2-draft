@@ -10,7 +10,7 @@ namespace ChessConsole {
             while (true) {
                 try {
                     Console.Clear();
-                    UI.PrintBoard(chessMatch.Pieces);
+                    UI.PrintMatch(chessMatch);
                     Console.WriteLine();
                     Console.Write("Source: ");
                     ChessPosition source = UI.ReadChessPosition();

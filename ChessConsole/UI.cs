@@ -16,6 +16,13 @@ namespace ChessConsole {
             }
         }
 
+        public static void PrintMatch(ChessMatch chessMatch) {
+            PrintBoard(chessMatch.Pieces);
+            Console.WriteLine();
+            Console.WriteLine("Turn: " + chessMatch.Turn);
+            Console.WriteLine("Waiting player: " + chessMatch.CurrentPlayer);
+        }
+
         public static void PrintBoard(ChessPiece[,] pieces) {
 
             for (int i = 0; i < pieces.GetLength(0); i++) {
