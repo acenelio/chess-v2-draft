@@ -23,10 +23,14 @@ namespace Chess {
             }
         }
 
+        private void PlaceNewPiece(char column, int row, ChessPiece piece) {
+            _board.PlacePiece(piece, new ChessPosition(column, row).ToPosition());
+        }
+
         private void InitialSetup() {
-            _board.PlacePiece(new Rook(_board, Color.White), new Position(2, 1));
-            _board.PlacePiece(new King(_board, Color.Black), new Position(0, 4));
-            _board.PlacePiece(new King(_board, Color.White), new Position(7, 4));
+            PlaceNewPiece('b', 6, new Rook(_board, Color.White));
+            PlaceNewPiece('e', 8, new King(_board, Color.Black));
+            PlaceNewPiece('e', 1, new King(_board, Color.White));
         }
     }
 }
