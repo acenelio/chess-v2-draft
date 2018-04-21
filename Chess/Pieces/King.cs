@@ -6,6 +6,10 @@ namespace Chess.Pieces {
         public King(Board board, Color color) : base(board, color) {
         }
 
+        public override bool[,] PossibleMoves() {
+            return new bool[Board.Rows, Board.Columns];
+        }
+
         public override string ToString() {
             return "K";
         }

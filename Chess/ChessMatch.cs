@@ -42,6 +42,9 @@ namespace Chess {
             if (_board.Piece(position) == null) {
                 throw new ChessException("There is no piece on source position");
             }
+            if (!_board.Piece(position).IsThereAnyPossibleMove()) {
+                throw new ChessException("There is no possible moves for the chosen piece");
+            }
         }
 
         private void PlaceNewPiece(char column, int row, ChessPiece piece) {

@@ -1,7 +1,7 @@
 ﻿using BoardGame;
 
 namespace Chess {
-    public class ChessPiece : Piece {
+    public abstract class ChessPiece : Piece {
 
         public Color Color { get; private set; }
 
