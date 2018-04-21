@@ -21,7 +21,15 @@ namespace ChessConsole {
                 Console.Write("-");
             }
             else {
-                Console.Write(piece);
+                if (piece.Color == Color.White) {
+                    Console.Write(piece);
+                }
+                else {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(piece);
+                    Console.ForegroundColor = aux;
+                }
             }
             Console.Write(" ");
         }
