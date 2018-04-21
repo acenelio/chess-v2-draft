@@ -1,7 +1,7 @@
 ﻿using BoardGame;
 
 namespace Chess {
-    class ChessPosition {
+    public class ChessPosition {
 
         public char Column { get; set; }
         public int Row { get; set; }

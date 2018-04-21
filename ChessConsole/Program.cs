@@ -7,7 +7,28 @@ namespace ChessConsole {
 
             ChessMatch chessMatch = new ChessMatch();
 
-            UI.PrintBoard(chessMatch.Pieces);
+            while (true) {
+                try {
+                    Console.Clear();
+                    UI.PrintBoard(chessMatch.Pieces);
+                    Console.WriteLine();
+                    Console.Write("Source: ");
+                    ChessPosition source = UI.ReadChessPosition();
+
+                    Console.Write("Target: ");
+                    ChessPosition target = UI.ReadChessPosition();
+
+                    ChessPiece capturedPiece = chessMatch.PerformChessMove(source, target);
+                }
+                catch (ChessException e) {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+                catch (FormatException e) {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+            }
         }
     }
 }

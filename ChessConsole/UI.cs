@@ -4,6 +4,18 @@ using Chess;
 namespace ChessConsole {
     class UI {
 
+        public static ChessPosition ReadChessPosition() {
+            try {
+                string s = Console.ReadLine();
+                char column = s[0];
+                int row = int.Parse(s.Substring(1, 1));
+                return new ChessPosition(column, row);
+            }
+            catch (SystemException) {
+                throw new FormatException("Error reading ChessPosition. Valid values are from a1 to h8.");
+            }
+        }
+
         public static void PrintBoard(ChessPiece[,] pieces) {
 
             for (int i = 0; i < pieces.GetLength(0); i++) {

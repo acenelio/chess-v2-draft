@@ -36,6 +36,19 @@
             piece.Position = position;
         }
 
+        public Piece RemovePiece(Position position) {
+            if (!PositionExists(position)) {
+                throw new BoardException("Position not on the board");
+            }
+            if (Piece(position) == null) {
+                return null;
+            }
+            Piece aux = Piece(position);
+            aux.Position = null;
+            Pieces[position.Row, position.Column] = null;
+            return aux;
+        }
+
         public bool PositionExists(int row, int column) {
             return row >= 0 && row < Rows && column >= 0 && column < Columns;
         }
