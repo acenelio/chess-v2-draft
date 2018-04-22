@@ -78,6 +78,24 @@ namespace Chess {
                 _capturedPieces.Add(capturedPiece);
             }
 
+            // #specialmove castling kingside rook
+            if (p is King && target.Column == source.Column + 2) {
+                Position sourceT = new Position(source.Row, source.Column + 3);
+                Position targetT = new Position(source.Row, source.Column + 1);
+                ChessPiece rook = (ChessPiece)_board.RemovePiece(sourceT);
+                rook.IncreaseMoveCount();
+                _board.PlacePiece(rook, targetT);
+            }
+
+            // #specialmove castling queenside rook
+            if (p is King && target.Column == source.Column - 2) {
+                Position sourceT = new Position(source.Row, source.Column - 4);
+                Position targetT = new Position(source.Row, source.Column - 1);
+                ChessPiece rook = (ChessPiece)_board.RemovePiece(sourceT);
+                rook.IncreaseMoveCount();
+                _board.PlacePiece(rook, targetT);
+            }
+
             return capturedPiece;
         }
 
@@ -90,6 +108,24 @@ namespace Chess {
                 _board.PlacePiece(capturedPiece, target);
                 _piecesOnTheBoard.Add(capturedPiece);
                 _capturedPieces.Remove(capturedPiece);
+            }
+
+            // #specialmove castling kingside rook
+            if (p is King && target.Column == source.Column + 2) {
+                Position origemT = new Position(source.Row, source.Column + 3);
+                Position destinoT = new Position(source.Row, source.Column + 1);
+                ChessPiece rook = (ChessPiece)_board.RemovePiece(destinoT);
+                rook.DecreaseMoveCount();
+                _board.PlacePiece(rook, origemT);
+            }
+
+            // #specialmove castling queenside rook
+            if (p is King && target.Column == source.Column - 2) {
+                Position origemT = new Position(source.Row, source.Column - 4);
+                Position destinoT = new Position(source.Row, source.Column - 1);
+                ChessPiece rook = (ChessPiece)_board.RemovePiece(destinoT);
+                rook.DecreaseMoveCount();
+                _board.PlacePiece(rook, origemT);
             }
         }
 
@@ -121,7 +157,7 @@ namespace Chess {
             PlaceNewPiece('b', 1, new Knight(_board, Color.White));
             PlaceNewPiece('c', 1, new Bishop(_board, Color.White));
             PlaceNewPiece('d', 1, new Queen(_board, Color.White));
-            PlaceNewPiece('e', 1, new King(_board, Color.White));
+            PlaceNewPiece('e', 1, new King(_board, Color.White, this));
             PlaceNewPiece('f', 1, new Bishop(_board, Color.White));
             PlaceNewPiece('g', 1, new Knight(_board, Color.White));
             PlaceNewPiece('h', 1, new Rook(_board, Color.White));
@@ -138,7 +174,7 @@ namespace Chess {
             PlaceNewPiece('b', 8, new Knight(_board, Color.Black));
             PlaceNewPiece('c', 8, new Bishop(_board, Color.Black));
             PlaceNewPiece('d', 8, new Queen(_board, Color.Black));
-            PlaceNewPiece('e', 8, new King(_board, Color.Black));
+            PlaceNewPiece('e', 8, new King(_board, Color.Black, this));
             PlaceNewPiece('f', 8, new Bishop(_board, Color.Black));
             PlaceNewPiece('g', 8, new Knight(_board, Color.Black));
             PlaceNewPiece('h', 8, new Rook(_board, Color.Black));
