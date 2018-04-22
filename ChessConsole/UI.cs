@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Chess;
 
 namespace ChessConsole {
@@ -16,8 +17,10 @@ namespace ChessConsole {
             }
         }
 
-        public static void PrintMatch(ChessMatch chessMatch) {
+        public static void PrintMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
             PrintBoard(chessMatch.Pieces);
+            Console.WriteLine();
+            PrintCapturedPieces(captured);
             Console.WriteLine();
             Console.WriteLine("Turn: " + chessMatch.Turn);
             Console.WriteLine("Waiting player: " + chessMatch.CurrentPlayer);
@@ -74,6 +77,29 @@ namespace ChessConsole {
                 }
             }
             Console.Write(" ");
+        }
+
+        private static void PrintCapturedPieces(List<ChessPiece> captured) {
+            List<ChessPiece> white = captured.FindAll(item => item.Color == Color.White);
+            List<ChessPiece> black = captured.FindAll(item => item.Color == Color.Black);
+            Console.WriteLine("Captured pieces:");
+            Console.Write("White: ");
+            PrintList(white);
+            Console.WriteLine();
+            Console.Write("Black: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            PrintList(black);
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+        }
+
+        private static void PrintList(List<ChessPiece> list) {
+            Console.Write("[");
+            foreach (ChessPiece x in list) {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
         }
     }
 }

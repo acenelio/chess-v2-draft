@@ -1,4 +1,5 @@
-﻿using BoardGame;
+﻿using System.Collections.Generic;
+using BoardGame;
 using Chess.Pieces;
 
 namespace Chess {
@@ -6,10 +7,15 @@ namespace Chess {
 
         public int Turn { get; private set; }
         public Color CurrentPlayer { get; private set; }
+
         private Board _board;
+        private List<Piece> _piecesOnTheBoard;
+        private List<Piece> _capturedPieces;
 
         public ChessMatch() {
             _board = new Board(8, 8);
+            _piecesOnTheBoard = new List<Piece>();
+            _capturedPieces = new List<Piece>();
             Turn = 1;
             CurrentPlayer = Color.White;
             InitialSetup();
@@ -50,6 +56,12 @@ namespace Chess {
             Piece p = _board.RemovePiece(source);
             Piece capturedPiece = _board.RemovePiece(target);
             _board.PlacePiece(p, target);
+
+            if (capturedPiece != null) {
+                _piecesOnTheBoard.Remove(capturedPiece);
+                _capturedPieces.Add(capturedPiece);
+            }
+
             return capturedPiece;
         }
 
@@ -73,6 +85,7 @@ namespace Chess {
 
         private void PlaceNewPiece(char column, int row, ChessPiece piece) {
             _board.PlacePiece(piece, new ChessPosition(column, row).ToPosition());
+            _piecesOnTheBoard.Add(piece);
         }
 
         private void InitialSetup() {

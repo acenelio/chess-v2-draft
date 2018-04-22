@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Chess;
 
 namespace ChessConsole {
@@ -6,11 +7,12 @@ namespace ChessConsole {
         static void Main(string[] args) {
 
             ChessMatch chessMatch = new ChessMatch();
+            List<ChessPiece> captured = new List<ChessPiece>();
 
             while (true) {
                 try {
                     Console.Clear();
-                    UI.PrintMatch(chessMatch);
+                    UI.PrintMatch(chessMatch, captured);
                     Console.WriteLine();
                     Console.Write("Source: ");
                     ChessPosition source = UI.ReadChessPosition();
@@ -23,6 +25,10 @@ namespace ChessConsole {
                     ChessPosition target = UI.ReadChessPosition();
 
                     ChessPiece capturedPiece = chessMatch.PerformChessMove(source, target);
+
+                    if (capturedPiece != null) {
+                        captured.Add(capturedPiece);
+                    }
                 }
                 catch (ChessException e) {
                     Console.WriteLine(e.Message);
