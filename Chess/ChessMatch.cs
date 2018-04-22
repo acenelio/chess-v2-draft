@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BoardGame;
 using Chess.Pieces;
 
@@ -7,6 +8,7 @@ namespace Chess {
 
         public int Turn { get; private set; }
         public Color CurrentPlayer { get; private set; }
+        public bool Check { get; private set; }
 
         private Board _board;
         private List<Piece> _piecesOnTheBoard;
@@ -47,6 +49,13 @@ namespace Chess {
 
             Piece capturedPiece = MakeMove(source, target);
 
+            if (TestCheck(CurrentPlayer)) {
+                UndoMove(source, target, capturedPiece);
+                throw new ChessException("You can't put yourself in check");
+            }
+
+            Check = (TestCheck(Opponent(CurrentPlayer))) ? true : false;
+
             NextTurn();
 
             return (ChessPiece)capturedPiece;
@@ -63,6 +72,17 @@ namespace Chess {
             }
 
             return capturedPiece;
+        }
+
+        private void UndoMove(Position source, Position target, Piece capturedPiece) {
+            Piece p = _board.RemovePiece(target);
+            _board.PlacePiece(p, source);
+
+            if (capturedPiece != null) {
+                _board.PlacePiece(capturedPiece, target);
+                _piecesOnTheBoard.Add(capturedPiece);
+                _capturedPieces.Remove(capturedPiece);
+            }
         }
 
         private void ValidadeSourcePosition(Position position) {
@@ -107,6 +127,32 @@ namespace Chess {
         private void NextTurn() {
             Turn++;
             CurrentPlayer = (CurrentPlayer == Color.White) ? Color.Black : Color.White;
+        }
+
+        private Color Opponent(Color color) {
+            return (color == Color.White) ? Color.Black : Color.White;
+        }
+
+        private ChessPiece King(Color color) {
+            List<Piece> list = _piecesOnTheBoard.FindAll(x => (x as ChessPiece).Color == color);
+            foreach (Piece p in list) {
+                if (p is King) {
+                    return p as ChessPiece;
+                }
+            }
+            throw new InvalidOperationException("There is no " + color + " king on the board");
+        }
+
+        private bool TestCheck(Color color) {
+            Position kingPosition = King(color).ChessPosition.ToPosition();
+            List<Piece> opponentPieces = _piecesOnTheBoard.FindAll(x => (x as ChessPiece).Color == Opponent(color));
+            foreach (Piece p in opponentPieces) {
+                bool[,] mat = p.PossibleMoves();
+                if (mat[kingPosition.Row, kingPosition.Column]) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -24,6 +24,9 @@ namespace ChessConsole {
             Console.WriteLine();
             Console.WriteLine("Turn: " + chessMatch.Turn);
             Console.WriteLine("Waiting player: " + chessMatch.CurrentPlayer);
+            if (chessMatch.Check) {
+                Console.WriteLine("CHECK!");
+            }
         }
 
         public static void PrintBoard(ChessPiece[,] pieces) {

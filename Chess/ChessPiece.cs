@@ -9,6 +9,10 @@ namespace Chess {
             Color = color;
         }
 
+        public ChessPosition ChessPosition {
+            get { return ChessPosition.FromPosition(Position); }
+        }
+
         protected bool IsThereOpponentPiece(Position position) {
             ChessPiece p = (ChessPiece)Board.Piece(position);
             return p != null && p.Color != Color;
