@@ -118,7 +118,9 @@ namespace Chess {
 
         private void InitialSetup() {
             PlaceNewPiece('a', 1, new Rook(_board, Color.White));
+            PlaceNewPiece('c', 1, new Bishop(_board, Color.White));
             PlaceNewPiece('e', 1, new King(_board, Color.White));
+            PlaceNewPiece('f', 1, new Bishop(_board, Color.White));
             PlaceNewPiece('h', 1, new Rook(_board, Color.White));
             PlaceNewPiece('a', 2, new Pawn(_board, Color.White));
             PlaceNewPiece('b', 2, new Pawn(_board, Color.White));
@@ -130,7 +132,9 @@ namespace Chess {
             PlaceNewPiece('h', 2, new Pawn(_board, Color.White));
 
             PlaceNewPiece('a', 8, new Rook(_board, Color.Black));
+            PlaceNewPiece('c', 8, new Bishop(_board, Color.Black));
             PlaceNewPiece('e', 8, new King(_board, Color.Black));
+            PlaceNewPiece('f', 8, new Bishop(_board, Color.Black));
             PlaceNewPiece('h', 8, new Rook(_board, Color.Black));
             PlaceNewPiece('a', 7, new Pawn(_board, Color.Black));
             PlaceNewPiece('b', 7, new Pawn(_board, Color.Black));
