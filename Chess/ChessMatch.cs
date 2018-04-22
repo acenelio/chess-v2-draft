@@ -69,6 +69,7 @@ namespace Chess {
 
         private Piece MakeMove(Position source, Position target) {
             Piece p = _board.RemovePiece(source);
+            (p as ChessPiece).IncreaseMoveCount();
             Piece capturedPiece = _board.RemovePiece(target);
             _board.PlacePiece(p, target);
 
@@ -82,6 +83,7 @@ namespace Chess {
 
         private void UndoMove(Position source, Position target, Piece capturedPiece) {
             Piece p = _board.RemovePiece(target);
+            (p as ChessPiece).DecreaseMoveCount();
             _board.PlacePiece(p, source);
 
             if (capturedPiece != null) {
