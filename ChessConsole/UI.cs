@@ -23,9 +23,15 @@ namespace ChessConsole {
             PrintCapturedPieces(captured);
             Console.WriteLine();
             Console.WriteLine("Turn: " + chessMatch.Turn);
-            Console.WriteLine("Waiting player: " + chessMatch.CurrentPlayer);
-            if (chessMatch.Check) {
-                Console.WriteLine("CHECK!");
+            if (!chessMatch.Checkmate) {
+                Console.WriteLine("Waiting player: " + chessMatch.CurrentPlayer);
+                if (chessMatch.Check) {
+                    Console.WriteLine("CHECK!");
+                }
+            }
+            else {
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine("Winner: " + chessMatch.CurrentPlayer);
             }
         }
 

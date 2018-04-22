@@ -9,6 +9,7 @@ namespace Chess {
         public int Turn { get; private set; }
         public Color CurrentPlayer { get; private set; }
         public bool Check { get; private set; }
+        public bool Checkmate { get; private set; }
 
         private Board _board;
         private List<Piece> _piecesOnTheBoard;
@@ -56,7 +57,12 @@ namespace Chess {
 
             Check = (TestCheck(Opponent(CurrentPlayer))) ? true : false;
 
-            NextTurn();
+            if (TestCheckmate(Opponent(CurrentPlayer))) {
+                Checkmate = true;
+            }
+            else {
+                NextTurn();
+            }
 
             return (ChessPiece)capturedPiece;
         }
@@ -109,19 +115,12 @@ namespace Chess {
         }
 
         private void InitialSetup() {
-            PlaceNewPiece('c', 1, new Rook(_board, Color.White));
-            PlaceNewPiece('c', 2, new Rook(_board, Color.White));
-            PlaceNewPiece('d', 2, new Rook(_board, Color.White));
-            PlaceNewPiece('e', 2, new Rook(_board, Color.White));
-            PlaceNewPiece('e', 1, new Rook(_board, Color.White));
-            PlaceNewPiece('d', 1, new King(_board, Color.White));
+            PlaceNewPiece('h', 7, new Rook(_board, Color.White));
+            PlaceNewPiece('d', 1, new Rook(_board, Color.White));
+            PlaceNewPiece('e', 1, new King(_board, Color.White));
 
-            PlaceNewPiece('c', 7, new Rook(_board, Color.Black));
-            PlaceNewPiece('c', 8, new Rook(_board, Color.Black));
-            PlaceNewPiece('d', 7, new Rook(_board, Color.Black));
-            PlaceNewPiece('e', 7, new Rook(_board, Color.Black));
-            PlaceNewPiece('e', 8, new Rook(_board, Color.Black));
-            PlaceNewPiece('d', 8, new King(_board, Color.Black));
+            PlaceNewPiece('b', 8, new Rook(_board, Color.Black));
+            PlaceNewPiece('a', 8, new King(_board, Color.Black));
         }
 
         private void NextTurn() {
@@ -153,6 +152,31 @@ namespace Chess {
                 }
             }
             return false;
+        }
+
+        private bool TestCheckmate(Color color) {
+            if (!TestCheck(color)) {
+                return false;
+            }
+            List<Piece> list = _piecesOnTheBoard.FindAll(x => (x as ChessPiece).Color == color);
+            foreach (ChessPiece p in list) {
+                bool[,] mat = p.PossibleMoves();
+                for (int i = 0; i < _board.Rows; i++) {
+                    for (int j = 0; j < _board.Columns; j++) {
+                        if (mat[i, j]) {
+                            Position source = p.ChessPosition.ToPosition();
+                            Position target = new Position(i, j);
+                            Piece capturedPiece = MakeMove(source, target);
+                            bool testCheck = TestCheck(color);
+                            UndoMove(source, target, capturedPiece);
+                            if (!testCheck) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
     }
 }

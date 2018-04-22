@@ -9,7 +9,7 @@ namespace ChessConsole {
             ChessMatch chessMatch = new ChessMatch();
             List<ChessPiece> captured = new List<ChessPiece>();
 
-            while (true) {
+            while (!chessMatch.Checkmate) {
                 try {
                     Console.Clear();
                     UI.PrintMatch(chessMatch, captured);
@@ -39,6 +39,8 @@ namespace ChessConsole {
                     Console.ReadLine();
                 }
             }
+            Console.Clear();
+            UI.PrintMatch(chessMatch, captured);
         }
     }
 }
