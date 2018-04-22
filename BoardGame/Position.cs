@@ -9,7 +9,7 @@
             Column = column;
         }
 
-        public void setValues(int row, int column) {
+        public void SetValues(int row, int column) {
             Row = row;
             Column = column;
         }

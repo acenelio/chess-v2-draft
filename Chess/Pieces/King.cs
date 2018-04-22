@@ -17,42 +17,42 @@ namespace Chess.Pieces {
             Position p = new Position(0, 0);
 
             // above
-            p.setValues(Position.Row - 1, Position.Column);
+            p.SetValues(Position.Row - 1, Position.Column);
             if (Board.PositionExists(p) && CanMove(p)) {
                 mat[p.Row, p.Column] = true;
             }
             // ne
-            p.setValues(Position.Row - 1, Position.Column + 1);
+            p.SetValues(Position.Row - 1, Position.Column + 1);
             if (Board.PositionExists(p) && CanMove(p)) {
                 mat[p.Row, p.Column] = true;
             }
             // right
-            p.setValues(Position.Row, Position.Column + 1);
+            p.SetValues(Position.Row, Position.Column + 1);
             if (Board.PositionExists(p) && CanMove(p)) {
                 mat[p.Row, p.Column] = true;
             }
             // se
-            p.setValues(Position.Row + 1, Position.Column + 1);
+            p.SetValues(Position.Row + 1, Position.Column + 1);
             if (Board.PositionExists(p) && CanMove(p)) {
                 mat[p.Row, p.Column] = true;
             }
             // below
-            p.setValues(Position.Row + 1, Position.Column);
+            p.SetValues(Position.Row + 1, Position.Column);
             if (Board.PositionExists(p) && CanMove(p)) {
                 mat[p.Row, p.Column] = true;
             }
             // sw
-            p.setValues(Position.Row + 1, Position.Column - 1);
+            p.SetValues(Position.Row + 1, Position.Column - 1);
             if (Board.PositionExists(p) && CanMove(p)) {
                 mat[p.Row, p.Column] = true;
             }
             // left
-            p.setValues(Position.Row, Position.Column - 1);
+            p.SetValues(Position.Row, Position.Column - 1);
             if (Board.PositionExists(p) && CanMove(p)) {
                 mat[p.Row, p.Column] = true;
             }
             // nw
-            p.setValues(Position.Row - 1, Position.Column - 1);
+            p.SetValues(Position.Row - 1, Position.Column - 1);
             if (Board.PositionExists(p) && CanMove(p)) {
                 mat[p.Row, p.Column] = true;
             }

@@ -12,7 +12,7 @@ namespace Chess.Pieces {
             Position p = new Position(0, 0);
 
             // above
-            p.setValues(Position.Row - 1, Position.Column);
+            p.SetValues(Position.Row - 1, Position.Column);
             while (Board.PositionExists(p) && !Board.ThereIsAPiece(p)) {
                 mat[p.Row, p.Column] = true;
                 p.Row = p.Row - 1;
@@ -22,7 +22,7 @@ namespace Chess.Pieces {
             }
 
             // below
-            p.setValues(Position.Row + 1, Position.Column);
+            p.SetValues(Position.Row + 1, Position.Column);
             while (Board.PositionExists(p) && !Board.ThereIsAPiece(p)) {
                 mat[p.Row, p.Column] = true;
                 p.Row = p.Row + 1;
@@ -32,7 +32,7 @@ namespace Chess.Pieces {
             }
 
             // right
-            p.setValues(Position.Row, Position.Column + 1);
+            p.SetValues(Position.Row, Position.Column + 1);
             while (Board.PositionExists(p) && !Board.ThereIsAPiece(p)) {
                 mat[p.Row, p.Column] = true;
                 p.Column = p.Column + 1;
@@ -42,7 +42,7 @@ namespace Chess.Pieces {
             }
 
             // left
-            p.setValues(Position.Row, Position.Column - 1);
+            p.SetValues(Position.Row, Position.Column - 1);
             while (Board.PositionExists(p) && !Board.ThereIsAPiece(p)) {
                 mat[p.Row, p.Column] = true;
                 p.Column = p.Column - 1;
