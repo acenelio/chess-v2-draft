@@ -120,6 +120,7 @@ namespace Chess {
             PlaceNewPiece('a', 1, new Rook(_board, Color.White));
             PlaceNewPiece('b', 1, new Knight(_board, Color.White));
             PlaceNewPiece('c', 1, new Bishop(_board, Color.White));
+            PlaceNewPiece('d', 1, new Queen(_board, Color.White));
             PlaceNewPiece('e', 1, new King(_board, Color.White));
             PlaceNewPiece('f', 1, new Bishop(_board, Color.White));
             PlaceNewPiece('g', 1, new Knight(_board, Color.White));
@@ -136,6 +137,7 @@ namespace Chess {
             PlaceNewPiece('a', 8, new Rook(_board, Color.Black));
             PlaceNewPiece('b', 8, new Knight(_board, Color.Black));
             PlaceNewPiece('c', 8, new Bishop(_board, Color.Black));
+            PlaceNewPiece('d', 8, new Queen(_board, Color.Black));
             PlaceNewPiece('e', 8, new King(_board, Color.Black));
             PlaceNewPiece('f', 8, new Bishop(_board, Color.Black));
             PlaceNewPiece('g', 8, new Knight(_board, Color.Black));
