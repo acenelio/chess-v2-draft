@@ -29,6 +29,12 @@ namespace ChessConsole {
                     if (capturedPiece != null) {
                         captured.Add(capturedPiece);
                     }
+
+                    if (chessMatch.Promoted != null) {
+                        Console.Write("Enter piece for promotion (B/N/R/Q): ");
+                        string type = Console.ReadLine();
+                        chessMatch.ReplacePromotedPiece(type);
+                    }
                 }
                 catch (ChessException e) {
                     Console.WriteLine(e.Message);

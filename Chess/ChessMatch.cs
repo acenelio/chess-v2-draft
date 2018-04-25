@@ -11,6 +11,7 @@ namespace Chess {
         public bool Check { get; private set; }
         public bool Checkmate { get; private set; }
         public ChessPiece EnPassantVulnerable { get; private set; }
+        public ChessPiece Promoted { get; private set; }
 
         private Board _board;
         private List<Piece> _piecesOnTheBoard;
@@ -59,6 +60,15 @@ namespace Chess {
 
             ChessPiece movedPiece = (ChessPiece)_board.Piece(target);
 
+            // #specialmove promotion
+            Promoted = null;
+            if (movedPiece is Pawn) {
+                if ((movedPiece.Color == Color.White && target.Row == 0) || (movedPiece.Color == Color.Black && target.Row == 7)) {
+                    Promoted = (ChessPiece)_board.Piece(target);
+                    Promoted = ReplacePromotedPiece("Q");
+                }
+            }
+
             Check = (TestCheck(Opponent(CurrentPlayer))) ? true : false;
 
             if (TestCheckmate(Opponent(CurrentPlayer))) {
@@ -77,6 +87,32 @@ namespace Chess {
             }
 
             return (ChessPiece)capturedPiece;
+        }
+
+        public ChessPiece ReplacePromotedPiece(string type) {
+            if (Promoted == null) {
+                throw new InvalidOperationException("There is no piece to be promoted");
+            }
+            if (type != "B" && type != "N" && type != "R" && type != "Q") {
+                throw new ArgumentException("Invalid type for promotion");
+            }
+
+            Position pos = Promoted.ChessPosition.ToPosition();
+            Piece p = _board.RemovePiece(pos);
+            _piecesOnTheBoard.Remove(p);
+
+            ChessPiece newPiece = NewPiece(type, Promoted.Color);
+            _board.PlacePiece(newPiece, pos);
+            _piecesOnTheBoard.Add(newPiece);
+
+            return newPiece;
+
+            ChessPiece NewPiece(string t, Color color) {
+                if (t == "B") return new Bishop(_board, color);
+                if (t == "N") return new Knight(_board, color);
+                if (t == "Q") return new Queen(_board, color);
+                return new Rook(_board, color);
+            }
         }
 
         private Piece MakeMove(Position source, Position target) {
