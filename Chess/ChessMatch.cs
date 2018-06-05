@@ -305,12 +305,12 @@ namespace Chess {
                 return false;
             }
             List<Piece> list = _piecesOnTheBoard.FindAll(x => (x as ChessPiece).Color == color);
-            foreach (ChessPiece p in list) {
+            foreach (Piece p in list) {
                 bool[,] mat = p.PossibleMoves();
                 for (int i = 0; i < _board.Rows; i++) {
                     for (int j = 0; j < _board.Columns; j++) {
                         if (mat[i, j]) {
-                            Position source = p.ChessPosition.ToPosition();
+                            Position source = (p as ChessPiece).ChessPosition.ToPosition();
                             Position target = new Position(i, j);
                             Piece capturedPiece = MakeMove(source, target);
                             bool testCheck = TestCheck(color);

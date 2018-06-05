@@ -11,7 +11,7 @@ namespace Chess {
         }
 
         public ChessPosition ChessPosition {
-            get { return ChessPosition.FromPosition(Position); }
+            get { return ChessPosition.FromPosition(base.Position); }
         }
 
         protected bool IsThereOpponentPiece(Position position) {
