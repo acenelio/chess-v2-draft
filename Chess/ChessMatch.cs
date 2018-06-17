@@ -204,8 +204,6 @@ namespace Chess {
                         pawnPosition = new Position(4, target.Column);
                     }
                     _board.PlacePiece(pawn, pawnPosition);
-                    _piecesOnTheBoard.Add(pawn);
-                    _capturedPieces.Remove(pawn);
                 }
             }
         }
